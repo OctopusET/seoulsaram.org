@@ -13,6 +13,6 @@
 </p>
 
 <?php h("This website");?>
-<p>Original idea and code of this website is from <a href="https://fabiensanglard.net">Fabien Sanglard</a>, and then <a href="https://ariutti.github.io">Nicola Ariutti</a> adjusted his code.
+<p>Original idea and code of this website is from <a href="https://fabiensanglard.net/html/index.html">Fabien Sanglard</a>, and then <a href="https://github.com/ariutti/ariutti.github.io">Nicola Ariutti</a> adjusted his code.
 
 <p>Thanks Fabien and Ariutti!</p>
