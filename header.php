@@ -61,16 +61,27 @@
       font-size: 0.65em;
     }   
 
+    code {
+      background: #e1e1e1;
+      border-radius: 0.5ch;
+      padding: 0.2em 0.4em;
+      font-weight: bold;
+    }
+    
     pre {
-      background-color: white; 
-      border: 1px solid Black; 
-      padding-left: 2%;
-      padding-top: 1ch;
-      padding-bottom: 1ch;
-      /* Only take care of X overflow since this is the only part that can be too wide.
-         The Y axis will never overflow.
-      */
-      overflow: hidden;
+      background: #f8f8f8;
+      border: 1px solid #bbb;
+      border-radius: 0.5ch;
+      padding: 1ch 2%;
+      overflow: auto;
+      white-space: pre;
+    }
+    
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-weight: normal;
     }
 
     div.heading {
@@ -120,27 +131,18 @@
     width: 100%;
   }
 
-  code {
-    /*font-size: 110%;*/
-    font-weight: bold;
-    background-color: #e1e1e1;
-    border-radius: 0.5ch;
-    padding-left: 0.3ch;
-    padding-right: 0.3ch;
-  }
-
   </style>
   <title><?php echo $title;?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=1.0, user-scalable=yes">
 </head>  
   <body><br><center>
     <nav style="display: inline-block; vertical-align:middle;">
-<a href="/" class="title"><b>SEOULSARAM</b><br>
-</a><hr/><nav style="text-align: justify;display: inline-block; width: 100%;">
+<a href="/" class="title"><b>Sungjoon Moon's Website</b><br>
+</a><hr/><nav style="text-align: justify;display: inline-block; width: 100%; text-align: center;">
 <!--
 <a class="title" href="/about">ABOUT</a> &nbsp;<a class="title" href="/contact/index.html">CONTACT</a> &nbsp;<a class="title" href="../rss.xml">RSS</a> &nbsp;<a class="title" href="https://github.com/OctopusET">GITHUB</a></div></div>
 -->
-<a class="title" href="/about">ABOUT</a> &nbsp; <a class="title" href="/rss.xml">RSS</a></nav></nav>
+<b><a class="title" href="/about">ABOUT</a> &nbsp; <a class="title" href="/rss.xml">RSS</a></nav></nav></b>
 </center><br><br>
 <div style="margin-bottom: 2ch;text-transform: none;">
 <?php echo $date;?>
