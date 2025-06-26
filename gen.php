@@ -155,13 +155,8 @@ function generate($src_dir)
     $contents = ob_get_clean();
     chdir($cwd);
 
-    // === HTML minification ===
-    $minified = preg_replace("/<!--(.|\s)*?-->/", "", $contents);
-    $minified = preg_replace("/\s+/", " ", $minified);
-    $minified = preg_replace("/>\s+</", "><", trim($minified));
-
-    file_put_contents($dst, $minified);
-    echo "Generated {$dst} (minified)<br/>";
+    file_put_contents($dst, $contents);
+    echo "Generated {$dst}<br/>";
 }
 
 // Recursively find all directories containing src.php

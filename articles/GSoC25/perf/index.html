@@ -1,1 +1,191 @@
-<!DOCTYPE html><html lang='en'><head><meta charset="utf-8"><link rel="alternate" type="application/rss+xml" title="RSS Feed for seoulsaram.org" href="/rss.xml" /><style type="text/css"> * { font-size: 16px; font-family: MonoplexKR-Regular; /* font-family: 'DejaVu Sans Mono', 'D2 Coding', monospace; */ } /* @font-face { font-family: 'D2 Coding'; src: url('fonts/D2 Coding.woff2') format('woff2'); font-weight: 400; font-style: normal; } */ html { font-size: 16px; font-family: MonoplexKR-Regular; } @font-face { font-family: 'MonoplexKR-Regular'; src: url('/fonts/MonoplexKR-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; } html { max-width: 900px; /* For Desktop PC (see @media for Tablets/Phones) */ padding-left: 2%; padding-right: 3%; margin: 0 auto; background: #e3dfd3; } a { color: black; text-decoration: underline; } nav { } img { border: none; } p { margin-top: 0px; text-align: justify; } sup { vertical-align: 0.3em; font-size: 0.65em; } code { background: #e1e1e1; border-radius: 0.5ch; padding: 0.2em 0.4em; font-weight: bold; } pre { background: #f8f8f8; border: 1px solid #bbb; border-radius: 0.5ch; padding: 1ch 2%; overflow: auto; white-space: pre; } pre code { background: none; border: none; padding: 0; font-weight: normal; } div.heading { font-weight: bold; text-transform: uppercase; margin-top: 4ch; } /** { font-size: 16px; }*/ @media (max-width: 500px) { /* For small screen decices */ * { font-size: 12px; } } .title { text-decoration: none; } img.pixel, canvas.pixel { image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; } blockquote { background-color: #f3f3f3; border: dashed 1px grey; width: 97.5%; font-style: italic; text-align: justify; padding: 1ch; padding-top: 2ch; padding-bottom: 2ch; margin : 0ch; margin-bottom: 2ch; margin-top: 0ch; } blockquote div { text-transform: none; text-align: right; width: 100%; } </style><title>How to build perf for spacemit x60 and use it with dav1d</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=1.0, user-scalable=yes"></head><body><br><center><nav style="display: inline-block; vertical-align:middle;"><a href="/" class="title"><b>Sungjoon Moon's Website</b><br></a><hr/><nav style="text-align: justify;display: inline-block; width: 100%; text-align: center;"><b><a class="title" href="/about">ABOUT</a> &nbsp; <a class="title" href="/rss.xml">RSS</a></nav></nav></b></center><br><br><div style="margin-bottom: 2ch;text-transform: none;"></div><div class='heading'>How to build perf for spacemit x60 and use it with dav1d</div><hr/>This time we are going to explore how to use Perf command. This allows us to determine which functions have the most significant impact on decoding with dav1d. <div class='heading'>How to build perf</div><hr/><pre><code> cd linux/tools/perf/pmu-events ./jevents.py riscv spacemit/x60 . pmu-events.c </pre></code><p>It will fail, so remove the failing codes in jevents.py.</p><pre><code> if len(archs) &lt; 2: raise IOError(f&#39;Missing architecture directory \&#39;{_args.arch}\&#39;&#39;) </pre></code><p>Then, (I know some <code>make</code> options are not needed but it just works).</p><pre><code> cd .. make -j 8 V=1 VF=1 HOSTCC=riscv64-unknown-linux-gnu-gcc HOSTLD=riscv64-unknown-linux-gnu-ld CC=riscv64-unknown-linux-gnu-gcc CXX=riscv64-unknown-linux-gnu-g++ AR=riscv64-unknown-linux-gnu-ar LD=riscv64-unknown-linux-gnu-ld NM=riscv64-unknown-linux-gnu-nm PKG_CONFIG=riscv64-unknown-linux-gnu-pkg-config prefix=/usr bindir_relative=bin tipdir=share/doc/perf-6.8 &#39;EXTRA_CFLAGS=-O2 -pipe&#39; &#39;EXTRA_LDFLAGS=-Wl,-O1 -Wl,--as-needed&#39; ARCH=riscv BUILD_BPF_SKEL= BUILD_NONDISTRO=1 JDIR= CORESIGHT= GTK2= feature-gtk2-infobar= NO_AUXTRACE= NO_BACKTRACE= NO_DEMANGLE= NO_JEVENTS=0 </pre></code> ?<p>Cross compile fails, so just build it on your board. It took around 10mins on Milk-V jupiter.</p><div class='heading'>How to run perf</div><hr/><pre><code> sudo perf record -e u_mode_cycle ls sudo perf report # You might not need a root permission</code></pre><p>There’s other <code>-e</code> options you can try, Read lu_zeros' article. <a name="back_1" style="text-decoration: none;" href="#footnote_1"><sup>[1]</sup></a></p><pre><code>perf record --group -e u_mode_cycle,m_mode_cycle,s_mode_cycle perf record --group -e alu_inst,amo_inst,atomic_inst,fp_div_inst,fp_inst,fp_load_inst,fp_store_inst,load_inst,lr_inst,mult_inst,sc_inst,store_inst,unaligned_load_inst,unaligned_store_inst </code></pre><div class='heading'>What about dav1d?</div><hr/><p>I used this way:</p><pre><code>sudo perf record -e u_mode_cycle dav1d -i sample_video.ivf -o /dev/null</code></pre><style type='text/css'>td.ref { padding-bottom: 0ch; width:0; }</style><div class='heading'>References</div><hr/><p id='paperbox' style='text-align:left;'><table><tbody style='vertical-align: top;'><tr><td class='ref' style='width:1ch;'><a name="footnote_1"></a><a href="#back_1">^</a></td><td class='ref' style='width:4ch;'>[1]</td><td style='width:100%;text-align:left;' class='ref'><a href=" https://dev.to/luzero/bringing-up-bpi-f3-part-25-27o4">lu_zero’s article</a></td></tr></tbody></table></p><hr><center><footer> © 2025 Sungjoon Moon <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></footer></center></body></html>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="utf-8">
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for seoulsaram.org" href="/rss.xml" />
+  <style type="text/css">
+
+    * {
+       font-size: 16px;
+       font-family: MonoplexKR-Regular;
+       /* font-family: 'DejaVu Sans Mono', 'D2 Coding', monospace; */
+    }
+
+/*
+    @font-face {
+        font-family: 'D2 Coding';
+        src: url('fonts/D2 Coding.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+    }
+*/
+    html {
+       font-size: 16px;
+       font-family: MonoplexKR-Regular;
+    }
+
+    @font-face {
+        font-family: 'MonoplexKR-Regular';
+        src: url('/fonts/MonoplexKR-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    html {
+      max-width: 900px;  /* For Desktop PC (see @media for Tablets/Phones) */
+      padding-left: 2%;
+      padding-right: 3%;
+      margin: 0 auto;
+      background: #e3dfd3;
+    } 
+
+    a {
+      color: black;
+      text-decoration: underline;
+    }
+
+    nav {
+    }
+
+    img {
+      border: none; 
+    }
+
+    p {
+      margin-top: 0px;
+      text-align: justify;
+    }
+    sup {
+      vertical-align: 0.3em;
+      font-size: 0.65em;
+    }   
+
+    code {
+      background: #e1e1e1;
+      border-radius: 0.5ch;
+      padding: 0.2em 0.4em;
+      font-weight: bold;
+    }
+    
+    pre {
+      background: #f8f8f8;
+      border: 1px solid #bbb;
+      border-radius: 0.5ch;
+      padding: 1ch 2%;
+      overflow: auto;
+      white-space: pre;
+    }
+    
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-weight: normal;
+    }
+
+    div.heading {
+      font-weight: bold;      
+      text-transform: uppercase;
+      margin-top: 4ch;
+    }
+
+    /** {
+      font-size: 16px;
+    }*/
+    @media (max-width: 500px) { /* For small screen decices */
+      * {
+        font-size: 12px; 
+      }
+    }
+
+    .title {
+      text-decoration: none;
+    }
+
+    img.pixel, canvas.pixel {
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+
+    blockquote { 
+    background-color: #f3f3f3;
+    border: dashed 1px grey; 
+    width: 97.5%; 
+    font-style: italic; 
+    text-align: justify;
+
+    padding: 1ch; 
+    padding-top: 2ch; 
+    padding-bottom: 2ch;     
+    
+    margin : 0ch; 
+    margin-bottom: 2ch; 
+    margin-top: 0ch;
+  }
+
+  blockquote div {
+    text-transform: none;
+    text-align: right;
+    width: 100%;
+  }
+
+  </style>
+  <title>How to build perf for spacemit x60 and use it with dav1d</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=1.0, user-scalable=yes">
+</head>  
+  <body><br><center>
+    <nav style="display: inline-block; vertical-align:middle;">
+<a href="/" class="title"><b>Sungjoon Moon's Website</b><br>
+</a><hr/><nav style="text-align: justify;display: inline-block; width: 100%; text-align: center;">
+<!--
+<a class="title" href="/about">ABOUT</a> &nbsp;<a class="title" href="/contact/index.html">CONTACT</a> &nbsp;<a class="title" href="../rss.xml">RSS</a> &nbsp;<a class="title" href="https://github.com/OctopusET">GITHUB</a></div></div>
+-->
+<b><a class="title" href="/about">ABOUT</a> &nbsp; <a class="title" href="/rss.xml">RSS</a></nav></nav></b>
+</center><br><br>
+<div style="margin-bottom: 2ch;text-transform: none;">
+Jun 27, 2025</div>
+<div class='heading'>How to build perf for spacemit x60 and use it with dav1d</div><hr/>This time we are going to explore how to use Perf command.
+This allows us to determine which functions have the most significant impact on decoding with dav1d.
+
+<div class='heading'>How to build perf</div><hr/>
+<pre><code>cd linux/tools/perf/pmu-events
+./jevents.py riscv spacemit/x60 . pmu-events.c
+</pre></code>
+
+<p>It will fail, so remove the failing codes in jevents.py.</p>
+
+<pre><code>if len(archs) &lt; 2:
+  raise IOError(f&#39;Missing architecture directory \&#39;{_args.arch}\&#39;&#39;)
+</pre></code>
+
+<p>Then, (I know some <code>make</code> options are not needed but it just works).</p>
+
+<pre><code>cd ..
+make -j 8 V=1 VF=1 HOSTCC=riscv64-unknown-linux-gnu-gcc HOSTLD=riscv64-unknown-linux-gnu-ld CC=riscv64-unknown-linux-gnu-gcc CXX=riscv64-unknown-linux-gnu-g++ AR=riscv64-unknown-linux-gnu-ar LD=riscv64-unknown-linux-gnu-ld NM=riscv64-unknown-linux-gnu-nm PKG_CONFIG=riscv64-unknown-linux-gnu-pkg-config prefix=/usr bindir_relative=bin tipdir=share/doc/perf-6.8 &#39;EXTRA_CFLAGS=-O2 -pipe&#39; &#39;EXTRA_LDFLAGS=-Wl,-O1 -Wl,--as-needed&#39; ARCH=riscv BUILD_BPF_SKEL= BUILD_NONDISTRO=1 JDIR= CORESIGHT= GTK2= feature-gtk2-infobar= NO_AUXTRACE= NO_BACKTRACE= NO_DEMANGLE= NO_JEVENTS=0
+</pre></code>
+
+<p><b>Note</b>: Cross compile fails, so just build it on your board. It will take around 10mins on Milk-V jupiter.</p>
+
+<div class='heading'>How to run perf</div><hr/><pre><code>sudo perf record -e u_mode_cycle ls
+sudo perf report # You might not need a root permission
+</code></pre>
+
+<p>There’s other <code>-e</code> options you can try, Read lu_zeros' article. <a name="back_1" style="text-decoration: none;" href="#footnote_1"><sup>[1]</sup></a></p>
+
+<pre><code>perf record --group -e u_mode_cycle,m_mode_cycle,s_mode_cycle
+perf record --group -e alu_inst,amo_inst,atomic_inst,fp_div_inst,fp_inst,fp_load_inst,fp_store_inst,load_inst,lr_inst,mult_inst,sc_inst,store_inst,unaligned_load_inst,unaligned_store_inst
+</code></pre>
+
+<div class='heading'>What about dav1d?</div><hr/><p>I used this way:</p>
+<pre><code>sudo perf record -e u_mode_cycle dav1d -i sample_video.ivf -o /dev/null</code></pre>
+
+<style type='text/css'>td.ref { padding-bottom: 0ch; width:0; }</style><div class='heading'>References</div><hr/><p id='paperbox' style='text-align:left;'><table><tbody style='vertical-align: top;'><tr><td class='ref' style='width:1ch;'><a name="footnote_1"></a><a href="#back_1">^</a></td><td class='ref' style='width:4ch;'>[1]</td><td style='width:100%;text-align:left;' class='ref'><a href=" https://dev.to/luzero/bringing-up-bpi-f3-part-25-27o4">lu_zero’s article</a></td></tr></tbody></table></p><hr>
+<center>
+<footer>
+© 2025 Sungjoon Moon
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+</footer>
+</center>
+</body>
+</html>
