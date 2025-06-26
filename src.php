@@ -8,7 +8,7 @@ Welcome to my personal blog, seoulsaram.org.
 
 <p style="text-align: left;margin-bottom: 1ch;">
 
-2025/06/27: <a href="articles/GSoC25/perf">GSoC25 - How to use perf</a><br></br>
+2025/06/27: <a href="articles/GSoC25/perf">GSoC25 - How to build perf for spacemit x60 and use it with dav1d</a><br></br>
 <!--2025/06/22: <a href="articles/GSoC25/week4">VDD24 - D-day</a><br></br>
 2025/06/22: <a href="articles/GSoC25/week3">VDD24 - D-day</a><br></br>
 2025/06/22: <a href="articles/GSoC25/week2">VDD24 - D-day</a><br></br>
