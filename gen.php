@@ -164,18 +164,29 @@ function generate($src_dir)
     echo "Generated {$dst} (minified)<br/>";
 }
 
-generate(".");
-generate("about");
-/*
-generate("articles/VDD24/howitbegan");
-generate("articles/VDD24/Dday");
-generate("articles/GSoC/");
-generate("articles/GSoC/week1");
-generate("articles/GSoC/week2");
-generate("articles/GSoC/week3");
-generate("articles/GSoC/week4");
- */
-generate("articles/GSoC25/perf");
+// Recursively find all directories containing src.php
+function generate_all_src_dirs($base_dir) {
+    $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($base_dir));
+    foreach ($rii as $file) {
+        if ($file->isFile() && $file->getFilename() === 'src.php') {
+            $dir = $file->getPath();
+            generate($dir);
+        }
+    }
+}
+
+// Generate for root and about (if they exist)
+if (file_exists('./src.php')) {
+    generate('.');
+}
+if (file_exists('./about/src.php')) {
+    generate('about');
+}
+
+// Recursively generate for all src.php under articles/
+if (is_dir('articles')) {
+    generate_all_src_dirs('articles');
+}
 
 generate_rss();
 ?>
