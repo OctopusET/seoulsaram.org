@@ -6,6 +6,14 @@ $site_url = "https://seoulsaram.org";
 $site_description = "Sungjoon Moon's Personal Blog";
 $site_language = "en-us";
 
+// List of directories to exclude from RSS feed
+// Add new exclusions here as needed
+$excluded_paths = array(
+    'about',        // About page
+    '.',            // Root directory
+    // Add more exclusions here in the future
+);
+
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
 echo '<channel>' . "\n";
@@ -15,7 +23,7 @@ echo '<description>' . $site_description . '</description>' . "\n";
 echo '<language>' . $site_language . '</language>' . "\n";
 echo '<atom:link href="' . $site_url . '/rss.xml" rel="self" type="application/rss+xml" />' . "\n";
 
-function scanArticlesRecursive($base_dir, $site_url, $relative_path = 'articles') {
+function scanArticlesRecursive($base_dir, $site_url, $relative_path = 'articles', $excluded_paths = array()) {
     $articles = array();
     $full_path = $base_dir . '/' . $relative_path;
     if (!is_dir($full_path)) {
@@ -28,8 +36,14 @@ function scanArticlesRecursive($base_dir, $site_url, $relative_path = 'articles'
         }
         $current_path = $relative_path . '/' . $dir;
         $current_full_path = $base_dir . '/' . $current_path;
+
+        $relative_from_articles = ($relative_path === 'articles') ? $dir : substr($current_path, 9);
+        if (in_array($relative_from_articles, $excluded_paths)) {
+            continue;
+        }
+ 
         if (is_dir($current_full_path)) {
-            $articles = array_merge($articles, scanArticlesRecursive($base_dir, $site_url, $current_path));
+            $articles = array_merge($articles, scanArticlesRecursive($base_dir, $site_url, $current_path, $excluded_paths));
         } elseif ($dir === 'src.php') {
             $content = file_get_contents($current_full_path);
 
@@ -67,7 +81,7 @@ function scanArticlesRecursive($base_dir, $site_url, $relative_path = 'articles'
 
 date_default_timezone_set('Asia/Seoul');
 
-$articles = scanArticlesRecursive(__DIR__, $site_url);
+$articles = scanArticlesRecursive(__DIR__, $site_url, 'articles', $excluded_paths);
 
 usort($articles, function($a, $b) {
     return $b['timestamp'] - $a['timestamp'];
