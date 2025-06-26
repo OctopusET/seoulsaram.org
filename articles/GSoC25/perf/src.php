@@ -37,3 +37,5 @@ perf record --group -e alu_inst,amo_inst,atomic_inst,fp_div_inst,fp_inst,fp_load
 <p>I used this way:</p>
 <pre><code>sudo perf record -e u_mode_cycle dav1d -i sample_video.ivf -o /dev/null</code></pre>
 
+<?php h("Vendor's Official documentation"); ?>
+I found this document <?php footnote("Spacemit's Development Guide", "https://bianbu.spacemit.com/en/development/perf/"); ?> on Internet.
