@@ -1,0 +1,24 @@
+baseURL = "https://seoulsaram.org"
+title = "Sungjoon Moon's Website"
+languageCode = "en-us"
+theme = "monospace-sanglard"
+disablePathToLower = true
+disableHugoGeneratorInject = true
+timeZone = "Asia/Seoul"
+
+[params]
+  author = "Sungjoon Moon"
+  description = "Sungjoon Moon's Personal Blog"
+  rssTitle = "SEOULSARAM"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.goldmark.extensions.typographer]
+  disable = true
+
+[outputFormats.RSS]
+  baseName = "rss"
+
+[outputs]
+  home = ["HTML", "RSS"]
