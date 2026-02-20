@@ -1,4 +1,7 @@
-# Writing a proposal for GSoC
+---
+title: "Writing a proposal for GSoC"
+draft: true
+---
 
 ## GSoC
 

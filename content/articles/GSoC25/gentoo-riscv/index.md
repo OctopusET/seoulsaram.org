@@ -1,4 +1,7 @@
-# Building a Gentoo image for Milk-V Jupiter with v flag
+---
+title: "Building a Gentoo image for Milk-V Jupiter with v flag"
+draft: true
+---
 
 ## crossdev-stages
 

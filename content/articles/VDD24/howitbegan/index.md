@@ -1,4 +1,7 @@
-# VDD24
+---
+title: "VDD24 - How it began"
+draft: true
+---
 VideoLan, an organisation developed VLC and another famous softwares organize a conference called video dev days everyyear.
 
 Even I was long time uesr of softwares they support and develop but I haven't heard about that event before.
@@ -22,6 +25,7 @@ Almost a year later he contacted me with IRC and he was asking ffmpeg team is lo
 unfortunately I lost IRC logs so I don't remember whole conversation
 
 ## Journey to find a venue
+
 So I could connected with one of the person from ffmpeg team, Lynne. She is also amazing developer.
 
 She gave me a contact of VideoLan People.
