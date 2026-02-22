@@ -1,7 +1,7 @@
 baseURL = "https://seoulsaram.org"
 title = "Sungjoon Moon's Website"
 languageCode = "en-us"
-theme = "monospace-sanglard"
+theme = "hugo-theme-fs"
 disablePathToLower = true
 disableHugoGeneratorInject = true
 timeZone = "Asia/Seoul"
