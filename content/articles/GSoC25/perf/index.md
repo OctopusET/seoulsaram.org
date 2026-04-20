@@ -1,6 +1,7 @@
 ---
 title: "How to build perf for spacemit x60 and use it with dav1d"
 date: 2025-06-27
+tags: [GSoC25, GSoC, perf, RISC-V, dav1d]
 ---
 This time we are going to explore how to use Perf command.
 This allows us to determine which functions have the most significant impact on decoding with dav1d.
@@ -35,7 +36,7 @@ sudo perf record -e u_mode_cycle ls
 sudo perf report # You might not need a root permission
 ```
 
-There's other `-e` options you can try, Read lu_zeros' article. {{< footnote "lu_zero's article" " https://dev.to/luzero/bringing-up-bpi-f3-part-25-27o4" >}}
+There's other `-e` options you can try, Read lu_zero's article.[^1]
 
 ```bash
 perf record --group -e u_mode_cycle,m_mode_cycle,s_mode_cycle
@@ -52,4 +53,7 @@ sudo perf record -e u_mode_cycle dav1d -i sample_video.ivf -o /dev/null
 
 ## Vendor's Official documentation
 
-I found this document {{< footnote "Spacemit's Development Guide" "https://bianbu.spacemit.com/en/development/perf/" >}} on Internet.
+I found this document[^2] on Internet.
+
+[^1]: [lu_zero's article](https://dev.to/luzero/bringing-up-bpi-f3-part-25-27o4)
+[^2]: [Spacemit's Development Guide](https://bianbu.spacemit.com/en/development/perf/)

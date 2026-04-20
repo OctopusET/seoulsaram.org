@@ -6,13 +6,13 @@ tags: [GSoC25, GSoC, RISC-V, dav1d, RVV]
 
 ## Project Overview and Goals
 
-`dav1d` is an open-source AV1 video decoder that aims for the highest possible performance. The primary goal of this GSoC project was to optimize `dav1d`'s {{< footnote "dav1d" "https://code.videolan.org/videolan/dav1d" >}} core video processing functions by implementing hand-written assembly using the **RISC-V Vector (RVV) Extension**. The objective was to maximize performance to enable smooth playback of high-definition AV1 video on low-power RISC-V devices, thereby demonstrating and enhancing the multimedia capabilities of the RISC-V ecosystem.
+`dav1d`[^1] is an open-source AV1 video decoder that aims for the highest possible performance. The primary goal of this GSoC project was to optimize `dav1d`'s core video processing functions by implementing hand-written assembly using the **RISC-V Vector (RVV) Extension**. The objective was to maximize performance to enable smooth playback of high-definition AV1 video on low-power RISC-V devices, thereby demonstrating and enhancing the multimedia capabilities of the RISC-V ecosystem.
 
 ## Key Activities and Achievements
 
 During the project, I performed the following key activities:
 
-- **Building a RISC-V Gentoo Development Environment:** To facilitate this project, I first built and stabilized a cutting-edge Gentoo Linux development image. This involved using the crossdev-stages {{< footnote "crossdev-stages" "https://github.com/lu-zero/crossdev-stages" >}} scripts to cross-compile the entire system for RISC-V with full RVV support, a process during which I identified, debugged, and contributed fixes for numerous upstream bugs in core packages like GCC, crossdev, and Perl
+- **Building a RISC-V Gentoo Development Environment:** To facilitate this project, I first built and stabilized a cutting-edge Gentoo Linux development image. This involved using the crossdev-stages[^2] scripts to cross-compile the entire system for RISC-V with full RVV support, a process during which I identified, debugged, and contributed fixes for numerous upstream bugs in core packages like GCC, crossdev, and Perl
 - **Performance Analysis and Bottleneck Identification:** Using the `perf` tool, I analyzed `dav1d`'s performance to identify bottlenecks. The analysis confirmed that functions like **`prep_8tap`** and **`put_8tap`** were responsible for the most significant computational load.
 - **C-based Code Optimization:**
   - **w_mask C Code Improvement (MR !1804):** While implementing the RVV version, I identified an area in the existing C code that could be optimized. By simply pre-calculating and storing frequently used values in variables, I achieved a meaningful **~7% performance improvement** on an x86_64 CPU.
@@ -60,3 +60,6 @@ The following resources were extremely helpful throughout the project:
   - [A Gentle Introduction to RISC-V Vector Extension by 0x80.pl](https://0x80.pl/notesen/2024-11-09-riscv-vector-extension.html)
   - [Optimizing Software for RISC-V (VDD24) by Nathan Egge](https://people.videolan.org/~negge/vdd24.pdf)
   - [RISC-V 101 (RISC-V Summit EU) by Nathan Egge](https://people.videolan.org/~unlord/riscv101-2025.pdf)
+
+[^1]: [dav1d](https://code.videolan.org/videolan/dav1d)
+[^2]: [crossdev-stages](https://github.com/lu-zero/crossdev-stages)

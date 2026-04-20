@@ -1,40 +1,31 @@
 ---
 title: "About Sungjoon Moon"
 ---
+
 Hello, I'm Sungjoon Moon (문성준). I'm currently based in Seoul, Korea.
 
 ## Contact
 
 Please contact me if you have any question or just hang out with me!
-<br/>
-<p>
-  sourcehut  : <a href="https://git.sr.ht/~sumoon/">sumoon</a>
-  <br/>
-  github     : <a href="https://github.com/OctopusET/">OctopusET</a>
-  <br/>
-  mail       : <b>sumoon</b> at <b>seoulsaram</b> dot <b>org</b>
-  <br/>
-  matrix     : sumoon@matrix.org
-  <br/>
-  IRC        : OctopusET @ liberachat
-  <br/>
-  LinkedIn   : <a href="https://www.linkedin.com/in/sungjoon-moon/">https://www.linkedin.com/in/sungjoon-moon/</a>
-  <br/>
-</p>
+
+sourcehut  : [sumoon](https://git.sr.ht/~sumoon/)  
+github     : [OctopusET](https://github.com/OctopusET/)  
+mail       : **sumoon** at **seoulsaram** dot **org**  
+matrix     : sumoon@matrix.org  
+IRC        : OctopusET @ liberachat  
+LinkedIn   : [https://www.linkedin.com/in/sungjoon-moon/](https://www.linkedin.com/in/sungjoon-moon/)
 
 ## This website
 
-<a href="https://fabiensanglard.net/html/index.html">Fabien Sanglard</a> created the original idea and code for the website. Then, <a href="https://github.com/ariutti/ariutti.github.io">Nicola Ariutti</a> modified it and contributed more ideas. I then built a website based on their code.
+[Fabien Sanglard](https://fabiensanglard.net/html/index.html) created the original idea and code for the website. Then, [Nicola Ariutti](https://github.com/ariutti/ariutti.github.io) modified it and contributed more ideas. I then built a website based on their code.
 
-<p>Thank you so much Fabien and Ariutti!</p>
-<p>You can check my website source code <a href="https://github.com/OctopusET/seoulsaram.org">here!</a></p>
+Thank you so much Fabien and Ariutti!
+
+You can check my website source code [here!](https://github.com/OctopusET/seoulsaram.org)
 
 ## Talks
 
 I had some good opportunities to talk about the things I like and am interested in.
-<p>
-  <br/>
-  FOSSASIA 2025 (2025.03.15) : <a href="https://www.youtube.com/watch?v=d20nOfKSxTw">Introducing FOSS for All</a>
-  <br/>
-  FOSDEM 2025 (2025.02.01)   : <a href="https://fosdem.org/2025/schedule/event/fosdem-2025-6533-status-of-cjk-input-system-in-wayland/">Status of CJK input system in Wayland</a>
-</p>
+
+FOSSASIA 2025 (2025.03.15) : [Introducing FOSS for All](https://www.youtube.com/watch?v=d20nOfKSxTw)  
+FOSDEM 2025 (2025.02.01)   : [Status of CJK input system in Wayland](https://fosdem.org/2025/schedule/event/fosdem-2025-6533-status-of-cjk-input-system-in-wayland/)

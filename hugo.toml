@@ -27,6 +27,26 @@ timeZone = "Asia/Seoul"
 [minify]
   minifyOutput = true
 
+[[menu.main]]
+  name = "ABOUT"
+  url = "/about"
+  weight = 1
+
+[[menu.main]]
+  name = "RSS"
+  url = "/rss.xml"
+  weight = 2
+
+[[menu.main]]
+  name = "TAGS"
+  url = "/tags"
+  weight = 3
+
+[[menu.main]]
+  name = "RESUME"
+  url = "/resume.pdf"
+  weight = 4
+
 [outputFormats.RSS]
   baseName = "rss"
 
