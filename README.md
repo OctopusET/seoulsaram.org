@@ -4,4 +4,4 @@
 https://github.com/OctopusET/hugo-theme-fs
 
 ## Contents
-CC BY-SA 4.0
+CC BY 4.0
