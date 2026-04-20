@@ -4,6 +4,8 @@ languageCode = "en-us"
 theme = "hugo-theme-fs"
 disablePathToLower = true
 disableHugoGeneratorInject = true
+capitalizeListTitles = false
+enableRobotsTXT = true
 timeZone = "Asia/Seoul"
 
 [params]
@@ -16,6 +18,14 @@ timeZone = "Asia/Seoul"
 
 [markup.goldmark.extensions.typographer]
   disable = true
+
+[markup.highlight]
+  style = "github"
+  codeFences = true
+  noClasses = true
+
+[minify]
+  minifyOutput = true
 
 [outputFormats.RSS]
   baseName = "rss"
