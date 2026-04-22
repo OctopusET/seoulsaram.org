@@ -2,7 +2,9 @@
 title: "How to build perf for spacemit x60 and use it with dav1d"
 date: 2025-06-27
 tags: [GSoC25, GSoC, perf, RISC-V, dav1d]
+toc: true
 ---
+
 This time we are going to explore how to use Perf command.
 This allows us to determine which functions have the most significant impact on decoding with dav1d.
 

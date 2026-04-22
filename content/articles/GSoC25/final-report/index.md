@@ -1,7 +1,8 @@
 ---
-title: "2025 Final Report: RISC-V Vector (RVV) Optimization for the dav1d AV1 Decoder"
+title: "GSoC 2025 Final Report: RVV Optimization for the dav1d AV1 Decoder"
 date: 2025-09-01
 tags: [GSoC25, GSoC, RISC-V, dav1d, RVV]
+toc: true
 ---
 
 ## Project Overview and Goals
