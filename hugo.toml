@@ -12,6 +12,9 @@ timeZone = "Asia/Seoul"
   author = "Sungjoon Moon"
   description = "Sungjoon Moon's Personal Blog"
   rssTitle = "SEOULSARAM"
+  license = "CC BY 4.0"
+  licenseUrl = "https://creativecommons.org/licenses/by/4.0/"
+  notFoundImage = "/_media/apowerbookaboutnothing.jpg"
 
 [markup.goldmark.renderer]
   unsafe = true
