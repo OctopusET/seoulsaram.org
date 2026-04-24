@@ -22,8 +22,12 @@ timeZone = "Asia/Seoul"
 [markup.goldmark.extensions.typographer]
   disable = true
 
+[markup.goldmark.extensions.cjk]
+  enable = true
+  escapedSpace = true
+
 [markup.highlight]
-  style = "github"
+  style = "github-dark"
   codeFences = true
   noClasses = true
 
