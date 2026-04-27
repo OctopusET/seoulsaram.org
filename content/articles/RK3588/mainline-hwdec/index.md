@@ -28,7 +28,8 @@ And this Github discussion[^github] was helpful too.
 - gstreamer 1.28+
 - sway or any wayland compositor that supports dmabuf for zero copy (you may be able to use DRM or X11, but not tested)
 
-> Note: Some of these aren't needed if you just want `decoding`. It's done by VPU, so you might only need the upstream kernel. I'm focusing on **playing** video, which requires integration with GPU. And GPU needs some configurations.
+> [!NOTE]
+> Some of these aren't needed if you just want `decoding`. It's done by VPU, so you might only need the upstream kernel. I'm focusing on **playing** video, which requires integration with GPU. And GPU needs some configurations.
 
 These were enabled by default for me, but you might need to enable them yourself:
 
