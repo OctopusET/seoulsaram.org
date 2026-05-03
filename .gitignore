@@ -2,4 +2,4 @@ public/
 resources/
 .hugo_build.lock
 upload.sh
-resume.pdf
+/resume.pdf
